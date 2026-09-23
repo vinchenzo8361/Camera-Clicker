@@ -7,6 +7,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
+    overflow: hidden; /* Prevents scrollbars when numbers float up */
 }
 
 #game {
@@ -16,6 +17,7 @@ body {
     border-radius: 20px;
     box-shadow: 0 15px 25px rgba(0,0,0,0.5);
     min-width: 300px;
+    z-index: 10;
 }
 
 h1 {
@@ -26,16 +28,37 @@ h1 {
 
 #cameraBtn {
     width: 250px;
-    height: auto;
+    height: 250px;
+    border-radius: 50%; /* Makes the realistic image a nice circle */
+    object-fit: cover;
+    border: 6px solid #ecf0f1;
     cursor: pointer;
-    transition: transform 0.05s ease-in-out;
+    transition: transform 0.05s ease-in-out, box-shadow 0.05s ease-in-out;
     user-select: none;
     outline: none;
     -webkit-tap-highlight-color: transparent;
     -webkit-user-drag: none;
-    filter: drop-shadow(0 15px 15px rgba(0,0,0,0.3));
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
 }
 
 #cameraBtn:active {
-    transform: scale(0.9);
+    transform: scale(0.92);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+}
+
+/* Floating Number Animation */
+.floating-number {
+    position: absolute;
+    color: #f1c40f; /* Flashy yellow color */
+    font-size: 2rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    pointer-events: none;
+    animation: floatUp 0.8s ease-out forwards;
+    z-index: 100;
+}
+
+@keyframes floatUp {
+    0% { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(-80px) scale(1.3); }
 }
