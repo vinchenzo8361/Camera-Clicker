@@ -25,16 +25,17 @@ h1 {
 }
 
 #cameraBtn {
-    font-size: 120px;
-    background: none;
-    border: none;
+    width: 250px;
+    height: auto;
     cursor: pointer;
     transition: transform 0.05s ease-in-out;
     user-select: none;
     outline: none;
     -webkit-tap-highlight-color: transparent;
+    -webkit-user-drag: none;
+    filter: drop-shadow(0 15px 15px rgba(0,0,0,0.3));
 }
 
 #cameraBtn:active {
-    transform: scale(0.85);
+    transform: scale(0.9);
 }
