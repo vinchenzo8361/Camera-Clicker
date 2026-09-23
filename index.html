@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,9 +6,18 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="game">
-        <h1>Photos: <span id="score">0</span></h1>
-        <img src="camera.jpg" id="cameraBtn" alt="Realistic Camera" draggable="false">
+    <div id="layout">
+        <!-- Main Game Area -->
+        <div id="game">
+            <h1>Photos: <span id="score">0</span></h1>
+            <button id="cameraBtn">📷</button>
+        </div>
+        
+        <!-- Shop Sidebar -->
+        <div id="shop">
+            <h2>Shop</h2>
+            <p style="text-align: center; color: #7f8c8d;">Upgrades coming soon...</p>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
