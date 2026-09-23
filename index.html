@@ -9,14 +9,24 @@
     <div id="layout">
         <!-- Main Game Area -->
         <div id="game">
-            <h1>Photos: <span id="score">0</span></h1>
+            <div id="scoreBoard">
+                <h1>Photos: <span id="score">0.0</span></h1>
+            </div>
             <button id="cameraBtn">📷</button>
         </div>
         
         <!-- Shop Sidebar -->
         <div id="shop">
             <h2>Shop</h2>
-            <p style="text-align: center; color: #7f8c8d;">Upgrades coming soon...</p>
+            
+            <div class="upgrade" id="buyAutoFlash">
+                <div class="upgrade-info">
+                    <h3>Auto Flash (<span id="autoFlashCount">0</span>)</h3>
+                    <p>+0.1 photos/sec</p>
+                </div>
+                <button id="autoFlashBtn" disabled>Cost: <span id="autoFlashCost">50</span></button>
+            </div>
+            
         </div>
     </div>
     <script src="script.js"></script>
