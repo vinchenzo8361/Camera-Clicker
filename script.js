@@ -1,6 +1,6 @@
 ﻿let score = 0;
 let passiveRate = 0;
-let clickPower = 1; // Handled by Magic Lens!
+let clickPower = 1;
 
 let autoFlashCount = 0;
 let autoFlashCost = 50;
@@ -64,7 +64,6 @@ function loadGame() {
     }
 }
 
-// Save the game every 3 seconds
 setInterval(saveGame, 3000);
 
 // --- 📸 GAME UI LOGIC ---
@@ -85,7 +84,7 @@ setInterval(() => {
 }, 100);
 
 cameraBtn.addEventListener('click', (e) => {
-    score += clickPower; // Now scales with Magic Lens!
+    score += clickPower; 
     updateDisplay();
 
     const floatEl = document.createElement('div');
@@ -109,7 +108,6 @@ cameraBtn.addEventListener('click', (e) => {
     }, 800);
 });
 
-// Upgrades
 autoFlashBtn.addEventListener('click', () => {
     if (score >= autoFlashCost) {
         score -= autoFlashCost;
@@ -142,14 +140,10 @@ lensBtn.addEventListener('click', () => {
     if (score >= lensCost) {
         score -= lensCost;
         lensCount++;
-        clickPower++; // Each lens gives +1 manual click power!
+        clickPower++; 
         
-        // Lens gets very expensive quickly since click power is strong
-        if (lensCount >= 5) {
-            lensCost = Math.ceil(lensCost * 1.50);
-        } else {
-            lensCost = 1000;
-        }
+        if (lensCount >= 5) { lensCost = Math.ceil(lensCost * 1.50); } 
+        else { lensCost = 1000; }
         
         lensCostDisplay.textContent = lensCost;
         updateDisplay();
@@ -159,7 +153,7 @@ lensBtn.addEventListener('click', () => {
 // --- 🌟 GOLDEN CAMERA SYSTEM ---
 const goldenCamera = document.createElement('div');
 goldenCamera.id = 'goldenCamera';
-goldenCamera.textContent = '\u2728\uD83D\uDCF8\u2728'; // Sparkles + Camera!
+goldenCamera.textContent = '\u2728\uD83D\uDCF8\u2728';
 document.body.appendChild(goldenCamera);
 
 let goldenCameraActive = false;
@@ -169,14 +163,10 @@ function spawnGoldenCamera() {
     if (goldenCameraActive) return;
     goldenCameraActive = true;
     
-    // Choose starting side (left or right)
     const startLeft = Math.random() > 0.5;
-    
-    // Random height between 100px and bottom-200px
     const startY = Math.random() * (window.innerHeight - 300) + 150;
     const endY = Math.random() * (window.innerHeight - 300) + 150;
     
-    // Position it offscreen immediately without transition
     goldenCamera.style.transition = 'none';
     goldenCamera.style.top = startY + 'px';
     if (startLeft) {
@@ -186,10 +176,8 @@ function spawnGoldenCamera() {
     }
     goldenCamera.style.display = 'block';
     
-    // Force browser to register the offscreen position
     void goldenCamera.offsetWidth;
     
-    // Now trigger the 12-second fly-across transition
     goldenCamera.style.transition = 'left 12s linear, top 12s linear';
     goldenCamera.style.top = endY + 'px';
     if (startLeft) {
@@ -198,7 +186,6 @@ function spawnGoldenCamera() {
         goldenCamera.style.left = '-150px';
     }
     
-    // Disappears after exactly 12 seconds when it leaves the screen
     goldenCameraTimeout = setTimeout(() => {
         goldenCamera.style.display = 'none';
         goldenCameraActive = false;
@@ -236,9 +223,6 @@ goldenCamera.addEventListener('click', (e) => {
     scheduleGoldenCamera();
 });
 
-// INITIALIZATION
-loadGame();
-scheduleGoldenCamera();
 // --- ⚙️ SETTINGS & 🛠️ ADMIN MODE ---
 const adminPanel = document.getElementById('adminPanel');
 const adminToggleBtn = document.getElementById('adminToggleBtn');
@@ -246,23 +230,19 @@ const settingsBtn = document.getElementById('settingsBtn');
 const settingsPanel = document.getElementById('settingsPanel');
 const closeSettingsBtn = document.getElementById('closeSettingsBtn');
 
-// Admin Button Logic (Password Protected!)
 adminToggleBtn.addEventListener('click', () => {
     if (adminPanel.style.display === 'flex') {
-        adminPanel.style.display = 'none'; // Close it if it's already open
+        adminPanel.style.display = 'none';
     } else {
-        const pwd = prompt("Enter Admin Password:");
-        
-        // Checks for the 3 backticks password you requested (I also added "admin" as a backup)
+        const pwd = window.prompt("Enter Admin Password:");
         if (pwd === "```" || pwd === "admin") {
             adminPanel.style.display = 'flex';
         } else if (pwd !== null) {
-            alert("Incorrect password! Access denied.");
+            alert("Incorrect password!");
         }
     }
 });
 
-// Settings Logic
 settingsBtn.addEventListener('click', () => {
     settingsPanel.style.display = 'flex';
 });
@@ -271,7 +251,6 @@ closeSettingsBtn.addEventListener('click', () => {
     settingsPanel.style.display = 'none';
 });
 
-// Admin Panel Features
 document.getElementById('adminAddScore').addEventListener('click', () => {
     score += 10000;
     updateDisplay();
@@ -281,13 +260,16 @@ document.getElementById('adminSpawnGold').addEventListener('click', () => {
     goldenCameraActive = false; 
     goldenCamera.style.display = 'none';
     clearTimeout(goldenCameraTimeout);
-    
     spawnGoldenCamera();
 });
 
 document.getElementById('adminReset').addEventListener('click', () => {
-    if (confirm("Are you sure you want to WIPE all save data?")) {
+    if (window.confirm("Are you sure you want to WIPE all save data?")) {
         localStorage.removeItem('cameraClickerSave');
         location.reload(); 
     }
 });
+
+// INITIALIZATION
+loadGame();
+scheduleGoldenCamera();

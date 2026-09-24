@@ -8,6 +8,30 @@
 </head>
 <body>
     <div id="layout">
+        <!-- UTILITY BUTTONS -->
+        <div id="utilButtons">
+            <button id="settingsBtn">⚙️ Settings</button>
+            <button id="adminToggleBtn">🛠️ Admin</button>
+        </div>
+
+        <!-- SETTINGS PANEL -->
+        <div id="settingsPanel">
+            <h3>⚙️ Settings</h3>
+            <div class="setting-item">
+                <label>🎵 Music</label>
+                <button disabled>Coming Soon</button>
+            </div>
+            <div class="setting-item">
+                <label>🔊 Click Sounds</label>
+                <button disabled>Coming Soon</button>
+            </div>
+            <div class="setting-item">
+                <label>⚠️ Factory Reset</label>
+                <button disabled style="background:#d63031; color:white; opacity:0.8;">Coming Soon</button>
+            </div>
+            <button id="closeSettingsBtn">Close</button>
+        </div>
+
         <div id="game">
             <div id="scoreBoard">
                 <h1>Photos: <span id="score">0</span></h1>
@@ -42,37 +66,18 @@
                 </div>
                 <button id="lensBtn" disabled>Buy: <span id="lensCost">1000</span></button>
             </div>
-            
         </div>
-    </div>
-    <script src="script.js"></script>
-        <!-- UTILITY BUTTONS -->
-    <div id="utilButtons">
-        <button id="settingsBtn">⚙️ Settings</button>
-        <button id="adminToggleBtn">🛠️ Admin</button>
-    </div>
-
-    <!-- SETTINGS PANEL -->
-    <div id="settingsPanel">
-        <h3>⚙️ Settings</h3>
-        <div class="setting-item">
-            <label>🎵 Music</label>
-            <button disabled>Coming Soon</button>
-        </div>
-        <div class="setting-item">
-            <label>🔊 Click Sounds</label>
-            <button disabled>Coming Soon</button>
-        </div>
-        <button id="closeSettingsBtn">Close</button>
     </div>
 
     <!-- ADMIN PANEL -->
     <div id="adminPanel">
         <h3>🛠️ Dev Tools</h3>
-        <p style="margin:0 0 10px 0; font-size:0.8rem; color:#aaa;">(Press  to hide)</p>
+        <p style="margin:0 0 10px 0; font-size:0.8rem; color:#aaa;">(Click Admin again to hide)</p>
         <button id="adminAddScore">+10,000 Photos</button>
         <button id="adminSpawnGold">Force Golden Camera</button>
         <button id="adminReset">Wipe Save File</button>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
