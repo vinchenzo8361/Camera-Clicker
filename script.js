@@ -11,6 +11,9 @@ let grannyCost = 450;
 let lensCount = 0;
 let lensCost = 1000;
 
+let droneCount = 0;
+let droneCost = 5000;
+
 const scoreDisplay = document.getElementById('score');
 const cpsDisplay = document.getElementById('cpsDisplay');
 const cameraBtn = document.getElementById('cameraBtn');
@@ -24,6 +27,9 @@ const grannyCostDisplay = document.getElementById('grannyCost');
 const lensBtn = document.getElementById('lensBtn');
 const lensCostDisplay = document.getElementById('lensCost');
 
+const droneBtn = document.getElementById('droneBtn');
+const droneCostDisplay = document.getElementById('droneCost');
+
 // --- 💾 AUTO SAVE / LOAD SYSTEM ---
 function saveGame() {
     const saveData = {
@@ -35,7 +41,9 @@ function saveGame() {
         grannyCount: grannyCount,
         grannyCost: grannyCost,
         lensCount: lensCount,
-        lensCost: lensCost
+        lensCost: lensCost,
+        droneCount: droneCount,
+        droneCost: droneCost
     };
     localStorage.setItem('cameraClickerSave', JSON.stringify(saveData));
 }
@@ -57,9 +65,13 @@ function loadGame() {
         lensCount = saveData.lensCount || 0;
         lensCost = saveData.lensCost || 1000;
         
+        droneCount = saveData.droneCount || 0;
+        droneCost = saveData.droneCost || 5000;
+        
         autoFlashCostDisplay.textContent = autoFlashCost;
         grannyCostDisplay.textContent = grannyCost;
         lensCostDisplay.textContent = lensCost;
+        droneCostDisplay.textContent = droneCost;
         updateDisplay();
     }
 }
@@ -74,6 +86,7 @@ function updateDisplay() {
     autoFlashBtn.disabled = score < autoFlashCost;
     grannyBtn.disabled = score < grannyCost;
     lensBtn.disabled = score < lensCost;
+    droneBtn.disabled = score < droneCost;
 }
 
 setInterval(() => {
@@ -113,10 +126,8 @@ autoFlashBtn.addEventListener('click', () => {
         score -= autoFlashCost;
         autoFlashCount++;
         passiveRate += 0.1;
-        
         if (autoFlashCount >= 100) { autoFlashCost = Math.ceil(autoFlashCost * 1.10); } 
         else { autoFlashCost = 50; }
-        
         autoFlashCostDisplay.textContent = autoFlashCost;
         updateDisplay();
     }
@@ -127,10 +138,8 @@ grannyBtn.addEventListener('click', () => {
         score -= grannyCost;
         grannyCount++;
         passiveRate += 1.0;
-        
         if (grannyCount >= 10) { grannyCost = Math.ceil(grannyCost * 1.15); } 
         else { grannyCost = 450; }
-        
         grannyCostDisplay.textContent = grannyCost;
         updateDisplay();
     }
@@ -141,11 +150,21 @@ lensBtn.addEventListener('click', () => {
         score -= lensCost;
         lensCount++;
         clickPower++; 
-        
         if (lensCount >= 5) { lensCost = Math.ceil(lensCost * 1.50); } 
         else { lensCost = 1000; }
-        
         lensCostDisplay.textContent = lensCost;
+        updateDisplay();
+    }
+});
+
+droneBtn.addEventListener('click', () => {
+    if (score >= droneCost) {
+        score -= droneCost;
+        droneCount++;
+        passiveRate += 15.0; 
+        if (droneCount >= 5) { droneCost = Math.ceil(droneCost * 1.20); } 
+        else { droneCost = 5000; }
+        droneCostDisplay.textContent = droneCost;
         updateDisplay();
     }
 });
@@ -169,22 +188,16 @@ function spawnGoldenCamera() {
     
     goldenCamera.style.transition = 'none';
     goldenCamera.style.top = startY + 'px';
-    if (startLeft) {
-        goldenCamera.style.left = '-150px';
-    } else {
-        goldenCamera.style.left = (window.innerWidth + 150) + 'px';
-    }
+    if (startLeft) { goldenCamera.style.left = '-150px'; } 
+    else { goldenCamera.style.left = (window.innerWidth + 150) + 'px'; }
     goldenCamera.style.display = 'block';
     
-    void goldenCamera.offsetWidth;
+    void goldenCamera.offsetWidth; 
     
     goldenCamera.style.transition = 'left 12s linear, top 12s linear';
     goldenCamera.style.top = endY + 'px';
-    if (startLeft) {
-        goldenCamera.style.left = (window.innerWidth + 150) + 'px';
-    } else {
-        goldenCamera.style.left = '-150px';
-    }
+    if (startLeft) { goldenCamera.style.left = (window.innerWidth + 150) + 'px'; } 
+    else { goldenCamera.style.left = '-150px'; }
     
     goldenCameraTimeout = setTimeout(() => {
         goldenCamera.style.display = 'none';
@@ -229,6 +242,7 @@ const adminToggleBtn = document.getElementById('adminToggleBtn');
 const settingsBtn = document.getElementById('settingsBtn');
 const settingsPanel = document.getElementById('settingsPanel');
 const closeSettingsBtn = document.getElementById('closeSettingsBtn');
+const factoryResetBtn = document.getElementById('factoryResetBtn');
 
 adminToggleBtn.addEventListener('click', () => {
     if (adminPanel.style.display === 'flex') {
@@ -249,6 +263,13 @@ settingsBtn.addEventListener('click', () => {
 
 closeSettingsBtn.addEventListener('click', () => {
     settingsPanel.style.display = 'none';
+});
+
+factoryResetBtn.addEventListener('click', () => {
+    if (window.confirm("Are you 100% sure you want to WIPE all your progress? This cannot be undone!")) {
+        localStorage.removeItem('cameraClickerSave');
+        location.reload(); 
+    }
 });
 
 document.getElementById('adminAddScore').addEventListener('click', () => {
