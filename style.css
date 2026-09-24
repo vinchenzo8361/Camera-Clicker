@@ -1,6 +1,6 @@
 ﻿body {
     font-family: 'Fredoka One', cursive, sans-serif;
-    background-color: #74b9ff; /* Bright sky blue */
+    background-color: #74b9ff; 
     background-image: linear-gradient(135deg, #74b9ff 0%, #a8e6cf 100%);
     color: #2d3436; 
     margin: 0;
@@ -20,7 +20,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Fun floating bubbles effect */
     background-image: radial-gradient(rgba(255,255,255,0.4) 20%, transparent 20%),
                       radial-gradient(rgba(255,255,255,0.4) 20%, transparent 20%);
     background-size: 80px 80px;
@@ -40,13 +39,12 @@ h1 {
     font-size: 5rem;
     margin: 0;
     color: #ffffff; 
-    /* Massive cartoon drop shadow/outline */
     text-shadow: 4px 4px 0 #0984e3, -2px -2px 0 #0984e3, 2px -2px 0 #0984e3, -2px 2px 0 #0984e3, 2px 2px 0 #0984e3;
     letter-spacing: 3px;
 }
 
 #score {
-    color: #fdcb6e; /* Bright yellow */
+    color: #fdcb6e; 
 }
 
 #cpsDisplay {
@@ -57,7 +55,7 @@ h1 {
     background: #00cec9;
     display: inline-block;
     padding: 8px 25px;
-    border-radius: 40px; /* Bubbly pill shape */
+    border-radius: 40px; 
     border: 4px solid #ffffff;
     box-shadow: 0 5px 0 rgba(0,0,0,0.1);
 }
@@ -78,20 +76,19 @@ h1 {
 }
 
 #cameraBtn:active {
-    transform: scale(0.8) rotate(-15deg); /* Goofy big tilt */
+    transform: scale(0.8) rotate(-15deg); 
 }
 
 #shop {
     width: 360px;
-    background: #ffffff; /* Clean white shop */
-    border-left: 8px solid #ffeaa7; /* Playful yellow border */
+    background: #ffffff; 
+    border-left: 8px solid #ffeaa7; 
     padding: 25px;
     box-shadow: -10px 0 20px rgba(0,0,0,0.1);
     z-index: 20;
     display: flex;
     flex-direction: column;
     color: #2d3436; 
-    /* Soft rounded edges on the shop */
     border-top-left-radius: 40px;
     border-bottom-left-radius: 40px;
     margin: 15px 0 15px 0;
@@ -103,7 +100,7 @@ h1 {
     padding-bottom: 15px;
     margin-top: 0;
     font-size: 2.2rem;
-    color: #e84393; /* Fun pink header */
+    color: #e84393; 
 }
 
 .upgrade {
@@ -128,7 +125,7 @@ h1 {
 .upgrade-info p { margin: 5px 0 0 0; font-size: 1.1rem; color: #636e72; }
 
 .upgrade button {
-    background: #00b894; /* Bubbly green */
+    background: #00b894; 
     color: #ffffff;
     border: none;
     padding: 15px;
@@ -137,7 +134,7 @@ h1 {
     font-family: 'Fredoka One', cursive;
     font-size: 1.3rem;
     letter-spacing: 1px;
-    box-shadow: 0 6px 0 #009432; /* 3D chunky bottom */
+    box-shadow: 0 6px 0 #009432; 
     transition: all 0.1s ease;
     margin-top: 5px;
 }
@@ -173,5 +170,39 @@ h1 {
 
 @keyframes floatUp {
     0% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
-    100% { opacity: 0; transform: translateY(-130px) scale(1.5) rotate(20deg); } /* Spins slightly! */
+    100% { opacity: 0; transform: translateY(-130px) scale(1.5) rotate(20deg); } 
+}
+
+/* NEW: Golden Camera Styles */
+#goldenCamera {
+    position: absolute;
+    font-size: 80px;
+    cursor: pointer;
+    z-index: 200;
+    display: none; /* hidden by default */
+    user-select: none;
+    filter: drop-shadow(0 0 20px #f1c40f) drop-shadow(0 0 40px #f39c12);
+    animation: pulseGold 0.8s infinite alternate;
+}
+
+#goldenCamera:active {
+    transform: scale(0.8) rotate(15deg);
+}
+
+@keyframes pulseGold {
+    from { transform: scale(1) rotate(-5deg); filter: drop-shadow(0 0 15px #f1c40f); }
+    to { transform: scale(1.15) rotate(5deg); filter: drop-shadow(0 0 35px #f39c12); }
+}
+
+.golden-reward {
+    color: #f1c40f !important;
+    font-size: 4rem !important;
+    text-shadow: 3px 3px 0 #fff, -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, 2px 2px 0 #fff !important;
+    animation: floatUpGolden 1.5s ease-out forwards !important;
+    z-index: 201;
+}
+
+@keyframes floatUpGolden {
+    0% { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(-200px) scale(1.6); }
 }
