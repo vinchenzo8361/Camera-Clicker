@@ -92,6 +92,7 @@ h1 {
     border-top-left-radius: 40px;
     border-bottom-left-radius: 40px;
     margin: 15px 0 15px 0;
+    overflow-y: auto; /* Just in case upgrades go past the screen */
 }
 
 #shop h2 {
@@ -173,33 +174,34 @@ h1 {
     100% { opacity: 0; transform: translateY(-130px) scale(1.5) rotate(20deg); } 
 }
 
-/* NEW: Golden Camera Styles */
+/* NEW FLYING GOLDEN CAMERA */
 #goldenCamera {
-    position: absolute;
-    font-size: 80px;
+    position: fixed; /* absolute to the window */
+    font-size: 90px;
     cursor: pointer;
-    z-index: 200;
-    display: none; /* hidden by default */
+    z-index: 9999;
+    display: none; 
     user-select: none;
     filter: drop-shadow(0 0 20px #f1c40f) drop-shadow(0 0 40px #f39c12);
-    animation: pulseGold 0.8s infinite alternate;
+    /* Bobs up and down while the JS handles the left-to-right movement */
+    animation: bobGold 1s ease-in-out infinite alternate;
 }
 
 #goldenCamera:active {
-    transform: scale(0.8) rotate(15deg);
+    transform: scale(0.7) rotate(15deg);
 }
 
-@keyframes pulseGold {
-    from { transform: scale(1) rotate(-5deg); filter: drop-shadow(0 0 15px #f1c40f); }
-    to { transform: scale(1.15) rotate(5deg); filter: drop-shadow(0 0 35px #f39c12); }
+@keyframes bobGold {
+    0% { transform: translateY(-30px) scale(1) rotate(-10deg); filter: drop-shadow(0 0 15px #f1c40f); }
+    100% { transform: translateY(30px) scale(1.15) rotate(10deg); filter: drop-shadow(0 0 35px #f39c12); }
 }
 
 .golden-reward {
     color: #f1c40f !important;
-    font-size: 4rem !important;
-    text-shadow: 3px 3px 0 #fff, -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, 2px 2px 0 #fff !important;
+    font-size: 4.5rem !important;
+    text-shadow: 4px 4px 0 #fff, -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, 2px 2px 0 #fff !important;
     animation: floatUpGolden 1.5s ease-out forwards !important;
-    z-index: 201;
+    z-index: 9999;
 }
 
 @keyframes floatUpGolden {

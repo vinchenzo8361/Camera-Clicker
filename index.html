@@ -10,7 +10,7 @@
     <div id="layout">
         <div id="game">
             <div id="scoreBoard">
-                <h1>Photos: <span id="score">0.0</span></h1>
+                <h1>Photos: <span id="score">0</span></h1>
                 <p id="cpsDisplay">per second: 0.0</p>
             </div>
             <button id="cameraBtn">📷</button>
@@ -33,6 +33,14 @@
                     <p>+1.0 photos/sec</p>
                 </div>
                 <button id="grannyBtn" disabled>Buy: <span id="grannyCost">450</span></button>
+            </div>
+            
+            <div class="upgrade" id="buyLens">
+                <div class="upgrade-info">
+                    <h3>✨ Magic Lens</h3>
+                    <p>+1 per manual click</p>
+                </div>
+                <button id="lensBtn" disabled>Buy: <span id="lensCost">1000</span></button>
             </div>
             
         </div>
