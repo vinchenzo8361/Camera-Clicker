@@ -7,7 +7,6 @@
 </head>
 <body>
     <div id="layout">
-        <!-- Main Game Area -->
         <div id="game">
             <div id="scoreBoard">
                 <h1>Photos: <span id="score">0.0</span></h1>
@@ -15,16 +14,15 @@
             <button id="cameraBtn">📷</button>
         </div>
         
-        <!-- Shop Sidebar -->
         <div id="shop">
-            <h2>Shop</h2>
+            <h2>Upgrades</h2>
             
             <div class="upgrade" id="buyAutoFlash">
                 <div class="upgrade-info">
-                    <h3>Auto Flash (<span id="autoFlashCount">0</span>)</h3>
-                    <p>+0.1 photos/sec</p>
+                    <h3>Auto Flash</h3>
+                    <p id="autoFlashDesc">Currently: +0.0/sec</p>
                 </div>
-                <button id="autoFlashBtn" disabled>Cost: <span id="autoFlashCost">50</span></button>
+                <button id="autoFlashBtn" disabled>Buy: <span id="autoFlashCost">50</span></button>
             </div>
             
         </div>

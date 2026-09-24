@@ -1,22 +1,19 @@
 ﻿let score = 0;
 
-// Upgrades Data
 let autoFlashCount = 0;
 let autoFlashCost = 50;
-let autoFlashRate = 0; // per second
+let autoFlashRate = 0; // total rate per second
 
 const scoreDisplay = document.getElementById('score');
 const cameraBtn = document.getElementById('cameraBtn');
 
 const autoFlashBtn = document.getElementById('autoFlashBtn');
 const autoFlashCostDisplay = document.getElementById('autoFlashCost');
-const autoFlashCountDisplay = document.getElementById('autoFlashCount');
+const autoFlashDesc = document.getElementById('autoFlashDesc');
 
 function updateDisplay() {
-    // Show 1 decimal point so the user sees the +0.1 trickling in!
     scoreDisplay.textContent = score.toFixed(1);
     
-    // Enable or disable buy button based on score
     if (score >= autoFlashCost) {
         autoFlashBtn.disabled = false;
     } else {
@@ -24,10 +21,9 @@ function updateDisplay() {
     }
 }
 
-// Game Loop: Runs 10 times a second for visual smoothness
+// Tick loop for passive income
 setInterval(() => {
     if (autoFlashRate > 0) {
-        // Since rate is X per second, we add a tenth of it every 100ms
         score += (autoFlashRate / 10);
         updateDisplay();
     }
@@ -58,20 +54,23 @@ cameraBtn.addEventListener('click', (e) => {
     }, 1000);
 });
 
-// Buy Upgrade Logic
+// Auto Flash Buying Logic
 autoFlashBtn.addEventListener('click', () => {
     if (score >= autoFlashCost) {
         score -= autoFlashCost;
         autoFlashCount++;
         autoFlashRate += 0.1;
         
-        // Increase cost by 15% for the next purchase
-        autoFlashCost = Math.ceil(autoFlashCost * 1.15); 
+        // Price scales ONLY after buying 100 of them
+        if (autoFlashCount >= 100) {
+            autoFlashCost = Math.ceil(autoFlashCost * 1.10); 
+        } else {
+            autoFlashCost = 50; // Stays at flat 50
+        }
         
         autoFlashCostDisplay.textContent = autoFlashCost;
-        autoFlashCountDisplay.textContent = autoFlashCount;
+        // Display new formatting (e.g. "+0.2/sec" instead of bracket counts)
+        autoFlashDesc.textContent = \Currently: +\/sec\;
         updateDisplay();
     }
 });
-
-updateDisplay();
