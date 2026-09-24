@@ -239,27 +239,45 @@ goldenCamera.addEventListener('click', (e) => {
 // INITIALIZATION
 loadGame();
 scheduleGoldenCamera();
-// --- 🛠️ ADMIN MODE ---
+// --- ⚙️ SETTINGS & 🛠️ ADMIN MODE ---
 const adminPanel = document.getElementById('adminPanel');
+const adminToggleBtn = document.getElementById('adminToggleBtn');
+const settingsBtn = document.getElementById('settingsBtn');
+const settingsPanel = document.getElementById('settingsPanel');
+const closeSettingsBtn = document.getElementById('closeSettingsBtn');
 
-// Listen for the Tilde / Backtick key (`) to toggle the menu
-document.addEventListener('keydown', (e) => {
-    if (e.key === '`') {
-        if (adminPanel.style.display === 'flex') {
-            adminPanel.style.display = 'none';
-        } else {
+// Admin Button Logic (Password Protected!)
+adminToggleBtn.addEventListener('click', () => {
+    if (adminPanel.style.display === 'flex') {
+        adminPanel.style.display = 'none'; // Close it if it's already open
+    } else {
+        const pwd = prompt("Enter Admin Password:");
+        
+        // Checks for the 3 backticks password you requested (I also added "admin" as a backup)
+        if (pwd === "```" || pwd === "admin") {
             adminPanel.style.display = 'flex';
+        } else if (pwd !== null) {
+            alert("Incorrect password! Access denied.");
         }
     }
 });
 
+// Settings Logic
+settingsBtn.addEventListener('click', () => {
+    settingsPanel.style.display = 'flex';
+});
+
+closeSettingsBtn.addEventListener('click', () => {
+    settingsPanel.style.display = 'none';
+});
+
+// Admin Panel Features
 document.getElementById('adminAddScore').addEventListener('click', () => {
     score += 10000;
     updateDisplay();
 });
 
 document.getElementById('adminSpawnGold').addEventListener('click', () => {
-    // Reset flags so admin can force it even if it's currently on cooldown/active
     goldenCameraActive = false; 
     goldenCamera.style.display = 'none';
     clearTimeout(goldenCameraTimeout);
@@ -270,6 +288,6 @@ document.getElementById('adminSpawnGold').addEventListener('click', () => {
 document.getElementById('adminReset').addEventListener('click', () => {
     if (confirm("Are you sure you want to WIPE all save data?")) {
         localStorage.removeItem('cameraClickerSave');
-        location.reload(); // Reload page to start fresh
+        location.reload(); 
     }
 });

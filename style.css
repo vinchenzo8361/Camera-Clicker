@@ -249,3 +249,101 @@ h1 {
 
 #adminPanel button:hover { background: #57606f; transform: none; }
 #adminPanel button:active { background: #ff4757; }
+/* --- UTILITY & SETTINGS STYLES --- */
+#utilButtons {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    gap: 15px;
+    z-index: 50;
+}
+
+#utilButtons button {
+    background: #ffffff;
+    border: 4px solid #dfe4ea;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.1rem;
+    color: #2d3436;
+    cursor: pointer;
+    box-shadow: 0 5px 0 #b2bec3;
+    transition: all 0.1s;
+}
+
+#utilButtons button:hover {
+    transform: translateY(2px);
+    box-shadow: 0 3px 0 #b2bec3;
+}
+
+#utilButtons button:active {
+    transform: translateY(5px);
+    box-shadow: 0 0 0 #b2bec3;
+}
+
+#settingsPanel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    border: 8px solid #0984e3;
+    padding: 30px;
+    border-radius: 30px;
+    z-index: 99999;
+    display: none; /* hidden by default */
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+    min-width: 300px;
+}
+
+#settingsPanel h3 {
+    margin: 0 0 10px 0;
+    text-align: center;
+    color: #0984e3;
+    font-size: 2.5rem;
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Fredoka One', cursive;
+    color: #2d3436;
+    font-size: 1.2rem;
+}
+
+.setting-item button {
+    background: #dfe4ea;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 12px;
+    font-family: inherit;
+    color: #636e72;
+    font-weight: bold;
+}
+
+#closeSettingsBtn {
+    background: #e84393;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 15px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.4rem;
+    cursor: pointer;
+    box-shadow: 0 6px 0 #d63031;
+    transition: all 0.1s;
+    margin-top: 10px;
+}
+
+#closeSettingsBtn:hover { 
+    transform: translateY(2px); 
+    box-shadow: 0 4px 0 #d63031; 
+}
+#closeSettingsBtn:active { 
+    transform: translateY(6px); 
+    box-shadow: 0 0 0 #d63031; 
+}
