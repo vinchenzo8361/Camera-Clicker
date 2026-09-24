@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Camera Clicker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -16,14 +17,22 @@
         </div>
         
         <div id="shop">
-            <h2>Upgrades</h2>
+            <h2>Upgrade Shop!</h2>
             
             <div class="upgrade" id="buyAutoFlash">
                 <div class="upgrade-info">
-                    <h3>Auto Flash</h3>
-                    <p>+0.1 photos/sec</p> <!-- Now stays perfectly static -->
+                    <h3>⚡ Auto Flash</h3>
+                    <p>+0.1 photos/sec</p>
                 </div>
                 <button id="autoFlashBtn" disabled>Buy: <span id="autoFlashCost">50</span></button>
+            </div>
+
+            <div class="upgrade" id="buyGranny">
+                <div class="upgrade-info">
+                    <h3>👵 Photographer Granny</h3>
+                    <p>+1.0 photos/sec</p>
+                </div>
+                <button id="grannyBtn" disabled>Buy: <span id="grannyCost">450</span></button>
             </div>
             
         </div>

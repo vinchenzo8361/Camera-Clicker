@@ -1,7 +1,8 @@
 ﻿body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #f1f5f9; /* Slate 100 - much lighter */
-    color: #334155; 
+    font-family: 'Fredoka One', cursive, sans-serif;
+    background-color: #74b9ff; /* Bright sky blue */
+    background-image: linear-gradient(135deg, #74b9ff 0%, #a8e6cf 100%);
+    color: #2d3436; 
     margin: 0;
     height: 100vh;
     overflow: hidden;
@@ -19,14 +20,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f8fafc; /* Very light cool gray */
-    background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
-    background-size: 24px 24px;
+    /* Fun floating bubbles effect */
+    background-image: radial-gradient(rgba(255,255,255,0.4) 20%, transparent 20%),
+                      radial-gradient(rgba(255,255,255,0.4) 20%, transparent 20%);
+    background-size: 80px 80px;
+    background-position: 0 0, 40px 40px;
 }
 
 #scoreBoard {
     position: absolute;
-    top: 50px;
+    top: 30px;
     text-align: center;
     width: 100%;
     pointer-events: none; 
@@ -34,120 +37,141 @@
 }
 
 h1 {
-    font-size: 4rem;
+    font-size: 5rem;
     margin: 0;
-    letter-spacing: -1px;
-    color: #1e293b; /* Dark Slate Blue */
-    text-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    color: #ffffff; 
+    /* Massive cartoon drop shadow/outline */
+    text-shadow: 4px 4px 0 #0984e3, -2px -2px 0 #0984e3, 2px -2px 0 #0984e3, -2px 2px 0 #0984e3, 2px 2px 0 #0984e3;
+    letter-spacing: 3px;
 }
 
 #score {
-    color: #2563eb; /* Vibrant Blue */
+    color: #fdcb6e; /* Bright yellow */
 }
 
 #cpsDisplay {
-    margin: 5px 0 0 0;
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: #64748b; /* Medium cool gray */
-    text-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    margin: 10px 0 0 0;
+    font-size: 1.6rem;
+    color: #ffffff; 
+    text-shadow: 2px 2px 0 #00b894;
+    background: #00cec9;
+    display: inline-block;
+    padding: 8px 25px;
+    border-radius: 40px; /* Bubbly pill shape */
+    border: 4px solid #ffffff;
+    box-shadow: 0 5px 0 rgba(0,0,0,0.1);
 }
 
 #cameraBtn {
-    font-size: 170px; 
+    font-size: 180px; 
     background: none;
     border: none;
     cursor: pointer;
-    transition: transform 0.08s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     user-select: none;
     outline: none;
     -webkit-tap-highlight-color: transparent;
-    filter: drop-shadow(0 20px 20px rgba(0,0,0,0.15));
+    filter: drop-shadow(0 15px 10px rgba(0,0,0,0.2));
     position: relative;
     z-index: 10;
     line-height: 1;
 }
 
 #cameraBtn:active {
-    transform: scale(0.85) rotate(-5deg);
+    transform: scale(0.8) rotate(-15deg); /* Goofy big tilt */
 }
 
 #shop {
-    width: 340px;
-    background: #1e293b; /* Dark Slate Blue for contrast */
-    border-left: 1px solid #0f172a;
+    width: 360px;
+    background: #ffffff; /* Clean white shop */
+    border-left: 8px solid #ffeaa7; /* Playful yellow border */
     padding: 25px;
-    box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+    box-shadow: -10px 0 20px rgba(0,0,0,0.1);
     z-index: 20;
     display: flex;
     flex-direction: column;
-    color: #f8fafc; /* White text on dark sidebar */
+    color: #2d3436; 
+    /* Soft rounded edges on the shop */
+    border-top-left-radius: 40px;
+    border-bottom-left-radius: 40px;
+    margin: 15px 0 15px 0;
 }
 
 #shop h2 {
     text-align: center;
-    border-bottom: 2px solid #334155;
+    border-bottom: 5px dashed #fab1a0;
     padding-bottom: 15px;
     margin-top: 0;
-    font-size: 1.8rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    font-size: 2.2rem;
+    color: #e84393; /* Fun pink header */
 }
 
 .upgrade {
-    background: #334155; /* Medium dark slate */
+    background: #f1f2f6; 
     padding: 18px;
-    border-radius: 12px;
-    border: 1px solid #475569;
+    border-radius: 20px;
+    border: 4px solid #dfe4ea;
     width: 100%;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    gap: 12px;
+    margin-bottom: 15px;
+    transition: transform 0.1s;
 }
 
-.upgrade-info h3 { margin: 0; font-size: 1.4rem; color: #f1f5f9; }
-.upgrade-info p { margin: 5px 0 0 0; font-size: 1rem; color: #94a3b8; }
+.upgrade:hover {
+    transform: translateY(-4px) rotate(1deg);
+}
+
+.upgrade-info h3 { margin: 0; font-size: 1.5rem; color: #0984e3; }
+.upgrade-info p { margin: 5px 0 0 0; font-size: 1.1rem; color: #636e72; }
 
 .upgrade button {
-    background: #3b82f6; /* Bright vibrant blue button */
+    background: #00b894; /* Bubbly green */
     color: #ffffff;
     border: none;
-    padding: 14px;
-    border-radius: 8px;
+    padding: 15px;
+    border-radius: 15px;
     cursor: pointer;
-    font-weight: 800;
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    transition: all 0.15s ease;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    box-shadow: 0 6px 0 #009432; /* 3D chunky bottom */
+    transition: all 0.1s ease;
+    margin-top: 5px;
 }
 
 .upgrade button:hover:not(:disabled) { 
-    background: #60a5fa; 
-    transform: translateY(-2px);
+    background: #55efc4; 
+    transform: translateY(2px);
+    box-shadow: 0 4px 0 #009432;
+}
+
+.upgrade button:active:not(:disabled) {
+    transform: translateY(6px);
+    box-shadow: 0 0 0 #009432;
 }
 
 .upgrade button:disabled { 
-    background: #475569; 
-    color: #94a3b8; 
+    background: #b2bec3; 
+    box-shadow: 0 6px 0 #636e72;
+    color: #ffffff; 
     cursor: not-allowed; 
     transform: none;
 }
 
 .floating-number {
     position: absolute;
-    color: #3b82f6; /* Matching blue floaties */
-    font-size: 2.5rem;
-    font-weight: bold;
-    text-shadow: 0 2px 10px rgba(59, 130, 246, 0.4), 2px 2px 2px rgba(255, 255, 255, 0.8);
+    color: #fdcb6e; 
+    font-size: 3rem;
+    text-shadow: 3px 3px 0 #e17055, -2px -2px 0 #e17055, 2px -2px 0 #e17055, -2px 2px 0 #e17055, 2px 2px 0 #e17055;
     pointer-events: none;
-    animation: floatUp 0.8s ease-out forwards;
+    animation: floatUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     z-index: 100;
 }
 
 @keyframes floatUp {
-    0% { opacity: 1; transform: translateY(0) scale(1); }
-    100% { opacity: 0; transform: translateY(-100px) scale(1.4); }
+    0% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
+    100% { opacity: 0; transform: translateY(-130px) scale(1.5) rotate(20deg); } /* Spins slightly! */
 }
