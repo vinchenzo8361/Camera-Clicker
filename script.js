@@ -2,7 +2,7 @@
 
 let autoFlashCount = 0;
 let autoFlashCost = 50;
-let autoFlashRate = 0; // total rate per second
+let autoFlashRate = 0;
 
 const scoreDisplay = document.getElementById('score');
 const cameraBtn = document.getElementById('cameraBtn');
@@ -21,7 +21,6 @@ function updateDisplay() {
     }
 }
 
-// Tick loop for passive income
 setInterval(() => {
     if (autoFlashRate > 0) {
         score += (autoFlashRate / 10);
@@ -35,7 +34,8 @@ cameraBtn.addEventListener('click', (e) => {
 
     const floatEl = document.createElement('div');
     floatEl.classList.add('floating-number');
-    floatEl.textContent = '+1 📸';
+    // Using explicit Unicode so PowerShell never corrupts the emoji again
+    floatEl.textContent = '+1 \uD83D\uDCF8';
 
     const rect = cameraBtn.getBoundingClientRect();
     const x = (e.pageX !== undefined && e.pageX !== 0) ? e.pageX : rect.left + rect.width / 2;
@@ -54,23 +54,20 @@ cameraBtn.addEventListener('click', (e) => {
     }, 1000);
 });
 
-// Auto Flash Buying Logic
 autoFlashBtn.addEventListener('click', () => {
     if (score >= autoFlashCost) {
         score -= autoFlashCost;
         autoFlashCount++;
         autoFlashRate += 0.1;
         
-        // Price scales ONLY after buying 100 of them
         if (autoFlashCount >= 100) {
             autoFlashCost = Math.ceil(autoFlashCost * 1.10); 
         } else {
-            autoFlashCost = 50; // Stays at flat 50
+            autoFlashCost = 50;
         }
         
         autoFlashCostDisplay.textContent = autoFlashCost;
-        // Display new formatting (e.g. "+0.2/sec" instead of bracket counts)
-        autoFlashDesc.textContent = \Currently: +\/sec\;
+        autoFlashDesc.textContent = `Currently: +${autoFlashRate.toFixed(1)}/sec`;
         updateDisplay();
     }
 });

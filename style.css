@@ -19,7 +19,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Clean dark modern grid background instead of flat blue */
     background-color: #181818;
     background-image: radial-gradient(#333 1px, transparent 1px);
     background-size: 24px 24px;
@@ -30,6 +29,8 @@
     top: 60px;
     text-align: center;
     width: 100%;
+    pointer-events: none; /* Prevents the invisible div from blocking clicks */
+    z-index: 5;
 }
 
 h1 {
@@ -41,11 +42,11 @@ h1 {
 }
 
 #score {
-    color: #f39c12; /* Golden/Amber accent */
+    color: #f39c12;
 }
 
 #cameraBtn {
-    font-size: 170px; /* 15% smaller! */
+    font-size: 170px; 
     background: none;
     border: none;
     cursor: pointer;
@@ -54,10 +55,13 @@ h1 {
     outline: none;
     -webkit-tap-highlight-color: transparent;
     filter: drop-shadow(0 20px 20px rgba(0,0,0,0.6));
+    position: relative;
+    z-index: 10; /* Ensures camera is above the background and score box */
+    line-height: 1;
 }
 
 #cameraBtn:active {
-    transform: scale(0.85) rotate(-5deg); /* Slight tilt for juice */
+    transform: scale(0.85) rotate(-5deg);
 }
 
 #shop {
@@ -82,7 +86,6 @@ h1 {
     color: #fff;
 }
 
-/* Upgrade Item Styling */
 .upgrade {
     background: #252525;
     padding: 18px;
@@ -96,17 +99,8 @@ h1 {
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
-.upgrade-info h3 { 
-    margin: 0; 
-    font-size: 1.4rem; 
-    color: #fff;
-}
-
-.upgrade-info p { 
-    margin: 5px 0 0 0; 
-    font-size: 1rem; 
-    color: #aaa; 
-}
+.upgrade-info h3 { margin: 0; font-size: 1.4rem; color: #fff; }
+.upgrade-info p { margin: 5px 0 0 0; font-size: 1rem; color: #aaa; }
 
 .upgrade button {
     background: #f39c12;
