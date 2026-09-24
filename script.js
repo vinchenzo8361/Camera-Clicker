@@ -5,14 +5,15 @@ let autoFlashCost = 50;
 let autoFlashRate = 0;
 
 const scoreDisplay = document.getElementById('score');
+const cpsDisplay = document.getElementById('cpsDisplay');
 const cameraBtn = document.getElementById('cameraBtn');
-
 const autoFlashBtn = document.getElementById('autoFlashBtn');
 const autoFlashCostDisplay = document.getElementById('autoFlashCost');
-const autoFlashDesc = document.getElementById('autoFlashDesc');
 
 function updateDisplay() {
     scoreDisplay.textContent = score.toFixed(1);
+    // Display the live overall passive income rate
+    cpsDisplay.textContent = `per second: ${autoFlashRate.toFixed(1)}`;
     
     if (score >= autoFlashCost) {
         autoFlashBtn.disabled = false;
@@ -34,7 +35,6 @@ cameraBtn.addEventListener('click', (e) => {
 
     const floatEl = document.createElement('div');
     floatEl.classList.add('floating-number');
-    // Using explicit Unicode so PowerShell never corrupts the emoji again
     floatEl.textContent = '+1 \uD83D\uDCF8';
 
     const rect = cameraBtn.getBoundingClientRect();
@@ -67,7 +67,6 @@ autoFlashBtn.addEventListener('click', () => {
         }
         
         autoFlashCostDisplay.textContent = autoFlashCost;
-        autoFlashDesc.textContent = `Currently: +${autoFlashRate.toFixed(1)}/sec`;
         updateDisplay();
     }
 });
