@@ -11,8 +11,17 @@ let grannyCost = 450;
 let lensCount = 0;
 let lensCost = 1000;
 
+let ringLightCount = 0;
+let ringLightCost = 1500;
+
 let droneCount = 0;
 let droneCost = 5000;
+
+let dslrCount = 0;
+let dslrCost = 25000;
+
+let satelliteCount = 0;
+let satelliteCost = 50000;
 
 const scoreDisplay = document.getElementById('score');
 const cpsDisplay = document.getElementById('cpsDisplay');
@@ -27,23 +36,29 @@ const grannyCostDisplay = document.getElementById('grannyCost');
 const lensBtn = document.getElementById('lensBtn');
 const lensCostDisplay = document.getElementById('lensCost');
 
+const ringLightBtn = document.getElementById('ringLightBtn');
+const ringLightCostDisplay = document.getElementById('ringLightCost');
+
 const droneBtn = document.getElementById('droneBtn');
 const droneCostDisplay = document.getElementById('droneCost');
+
+const dslrBtn = document.getElementById('dslrBtn');
+const dslrCostDisplay = document.getElementById('dslrCost');
+
+const satelliteBtn = document.getElementById('satelliteBtn');
+const satelliteCostDisplay = document.getElementById('satelliteCost');
 
 // --- 💾 AUTO SAVE / LOAD SYSTEM ---
 function saveGame() {
     const saveData = {
-        score: score,
-        passiveRate: passiveRate,
-        clickPower: clickPower,
-        autoFlashCount: autoFlashCount,
-        autoFlashCost: autoFlashCost,
-        grannyCount: grannyCount,
-        grannyCost: grannyCost,
-        lensCount: lensCount,
-        lensCost: lensCost,
-        droneCount: droneCount,
-        droneCost: droneCost
+        score, passiveRate, clickPower,
+        autoFlashCount, autoFlashCost,
+        grannyCount, grannyCost,
+        lensCount, lensCost,
+        ringLightCount, ringLightCost,
+        droneCount, droneCost,
+        dslrCount, dslrCost,
+        satelliteCount, satelliteCost
     };
     localStorage.setItem('cameraClickerSave', JSON.stringify(saveData));
 }
@@ -65,13 +80,26 @@ function loadGame() {
         lensCount = saveData.lensCount || 0;
         lensCost = saveData.lensCost || 1000;
         
+        ringLightCount = saveData.ringLightCount || 0;
+        ringLightCost = saveData.ringLightCost || 1500;
+        
         droneCount = saveData.droneCount || 0;
         droneCost = saveData.droneCost || 5000;
+        
+        dslrCount = saveData.dslrCount || 0;
+        dslrCost = saveData.dslrCost || 25000;
+        
+        satelliteCount = saveData.satelliteCount || 0;
+        satelliteCost = saveData.satelliteCost || 50000;
         
         autoFlashCostDisplay.textContent = autoFlashCost;
         grannyCostDisplay.textContent = grannyCost;
         lensCostDisplay.textContent = lensCost;
+        ringLightCostDisplay.textContent = ringLightCost;
         droneCostDisplay.textContent = droneCost;
+        dslrCostDisplay.textContent = dslrCost;
+        satelliteCostDisplay.textContent = satelliteCost;
+        
         updateDisplay();
     }
 }
@@ -86,7 +114,10 @@ function updateDisplay() {
     autoFlashBtn.disabled = score < autoFlashCost;
     grannyBtn.disabled = score < grannyCost;
     lensBtn.disabled = score < lensCost;
+    ringLightBtn.disabled = score < ringLightCost;
     droneBtn.disabled = score < droneCost;
+    dslrBtn.disabled = score < dslrCost;
+    satelliteBtn.disabled = score < satelliteCost;
 }
 
 setInterval(() => {
@@ -116,9 +147,7 @@ cameraBtn.addEventListener('click', (e) => {
 
     document.body.appendChild(floatEl);
 
-    setTimeout(() => {
-        floatEl.remove();
-    }, 800);
+    setTimeout(() => { floatEl.remove(); }, 800);
 });
 
 autoFlashBtn.addEventListener('click', () => {
@@ -157,6 +186,18 @@ lensBtn.addEventListener('click', () => {
     }
 });
 
+ringLightBtn.addEventListener('click', () => {
+    if (score >= ringLightCost) {
+        score -= ringLightCost;
+        ringLightCount++;
+        passiveRate += 4.0; 
+        if (ringLightCount >= 5) { ringLightCost = Math.ceil(ringLightCost * 1.15); } 
+        else { ringLightCost = 1500; }
+        ringLightCostDisplay.textContent = ringLightCost;
+        updateDisplay();
+    }
+});
+
 droneBtn.addEventListener('click', () => {
     if (score >= droneCost) {
         score -= droneCost;
@@ -165,6 +206,30 @@ droneBtn.addEventListener('click', () => {
         if (droneCount >= 5) { droneCost = Math.ceil(droneCost * 1.20); } 
         else { droneCost = 5000; }
         droneCostDisplay.textContent = droneCost;
+        updateDisplay();
+    }
+});
+
+dslrBtn.addEventListener('click', () => {
+    if (score >= dslrCost) {
+        score -= dslrCost;
+        dslrCount++;
+        clickPower += 10; 
+        if (dslrCount >= 3) { dslrCost = Math.ceil(dslrCost * 1.50); } 
+        else { dslrCost = 25000; }
+        dslrCostDisplay.textContent = dslrCost;
+        updateDisplay();
+    }
+});
+
+satelliteBtn.addEventListener('click', () => {
+    if (score >= satelliteCost) {
+        score -= satelliteCost;
+        satelliteCount++;
+        passiveRate += 100.0; 
+        if (satelliteCount >= 5) { satelliteCost = Math.ceil(satelliteCost * 1.25); } 
+        else { satelliteCost = 50000; }
+        satelliteCostDisplay.textContent = satelliteCost;
         updateDisplay();
     }
 });
@@ -257,13 +322,8 @@ adminToggleBtn.addEventListener('click', () => {
     }
 });
 
-settingsBtn.addEventListener('click', () => {
-    settingsPanel.style.display = 'flex';
-});
-
-closeSettingsBtn.addEventListener('click', () => {
-    settingsPanel.style.display = 'none';
-});
+settingsBtn.addEventListener('click', () => { settingsPanel.style.display = 'flex'; });
+closeSettingsBtn.addEventListener('click', () => { settingsPanel.style.display = 'none'; });
 
 factoryResetBtn.addEventListener('click', () => {
     if (window.confirm("Are you 100% sure you want to WIPE all your progress? This cannot be undone!")) {

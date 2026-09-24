@@ -8,13 +8,11 @@
 </head>
 <body>
     <div id="layout">
-        <!-- UTILITY BUTTONS -->
         <div id="utilButtons">
             <button id="settingsBtn">⚙️ Settings</button>
             <button id="adminToggleBtn">🛠️ Admin</button>
         </div>
 
-        <!-- SETTINGS PANEL -->
         <div id="settingsPanel">
             <h3>⚙️ Settings</h3>
             <div class="setting-item">
@@ -66,6 +64,14 @@
                 </div>
                 <button id="lensBtn" disabled>Buy: <span id="lensCost">1000</span></button>
             </div>
+
+            <div class="upgrade" id="buyRingLight">
+                <div class="upgrade-info">
+                    <h3>💡 Ring Light</h3>
+                    <p>+4.0 photos/sec</p>
+                </div>
+                <button id="ringLightBtn" disabled>Buy: <span id="ringLightCost">1500</span></button>
+            </div>
             
             <div class="upgrade" id="buyDrone">
                 <div class="upgrade-info">
@@ -73,6 +79,22 @@
                     <p>+15.0 photos/sec</p>
                 </div>
                 <button id="droneBtn" disabled>Buy: <span id="droneCost">5000</span></button>
+            </div>
+
+            <div class="upgrade" id="buyDslr">
+                <div class="upgrade-info">
+                    <h3>💥 Pro DSLR</h3>
+                    <p>+10 per manual click</p>
+                </div>
+                <button id="dslrBtn" disabled>Buy: <span id="dslrCost">25000</span></button>
+            </div>
+
+            <div class="upgrade" id="buySatellite">
+                <div class="upgrade-info">
+                    <h3>🛰️ Satellite Camera</h3>
+                    <p>+100.0 photos/sec</p>
+                </div>
+                <button id="satelliteBtn" disabled>Buy: <span id="satelliteCost">50000</span></button>
             </div>
         </div>
     </div>
