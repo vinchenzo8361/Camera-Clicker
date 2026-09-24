@@ -239,3 +239,37 @@ goldenCamera.addEventListener('click', (e) => {
 // INITIALIZATION
 loadGame();
 scheduleGoldenCamera();
+// --- 🛠️ ADMIN MODE ---
+const adminPanel = document.getElementById('adminPanel');
+
+// Listen for the Tilde / Backtick key (`) to toggle the menu
+document.addEventListener('keydown', (e) => {
+    if (e.key === '`') {
+        if (adminPanel.style.display === 'flex') {
+            adminPanel.style.display = 'none';
+        } else {
+            adminPanel.style.display = 'flex';
+        }
+    }
+});
+
+document.getElementById('adminAddScore').addEventListener('click', () => {
+    score += 10000;
+    updateDisplay();
+});
+
+document.getElementById('adminSpawnGold').addEventListener('click', () => {
+    // Reset flags so admin can force it even if it's currently on cooldown/active
+    goldenCameraActive = false; 
+    goldenCamera.style.display = 'none';
+    clearTimeout(goldenCameraTimeout);
+    
+    spawnGoldenCamera();
+});
+
+document.getElementById('adminReset').addEventListener('click', () => {
+    if (confirm("Are you sure you want to WIPE all save data?")) {
+        localStorage.removeItem('cameraClickerSave');
+        location.reload(); // Reload page to start fresh
+    }
+});

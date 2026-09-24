@@ -208,3 +208,44 @@ h1 {
     0% { opacity: 1; transform: translateY(0) scale(1); }
     100% { opacity: 0; transform: translateY(-200px) scale(1.6); }
 }
+/* --- ADMIN PANEL STYLES --- */
+#adminPanel {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(15, 15, 20, 0.95);
+    border: 3px solid #ff4757;
+    padding: 20px;
+    border-radius: 15px;
+    color: white;
+    z-index: 99999;
+    font-family: -apple-system, monospace;
+    display: none; /* Hidden by default, toggled by JS */
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+#adminPanel h3 { 
+    margin: 0; 
+    color: #ff4757; 
+    text-shadow: none; 
+    font-size: 1.2rem;
+    font-family: 'Fredoka One', cursive;
+}
+
+#adminPanel button {
+    background: #2f3542; 
+    color: white; 
+    border: none;
+    padding: 10px; 
+    cursor: pointer; 
+    border-radius: 5px;
+    font-weight: bold;
+    font-family: inherit;
+    box-shadow: none;
+    margin: 0;
+}
+
+#adminPanel button:hover { background: #57606f; transform: none; }
+#adminPanel button:active { background: #ff4757; }
