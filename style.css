@@ -408,4 +408,127 @@ h1 {
     color: #ffffff;
     text-shadow: 2px 2px 0 #2d3436;
     transition: color 0.2s, transform 0.2s;
+}/* --- FRENZY COMBO METER --- */
+#comboContainer {
+    position: absolute;
+    left: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    z-index: 15;
 }
+
+#comboTitle {
+    margin: 0;
+    color: #ffffff;
+    font-size: 1.5rem;
+    text-shadow: 2px 2px 0 #0984e3;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#comboMeterWrapper {
+    width: 100px;
+    height: 300px;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 25%, 65% 50%, 65% 100%, 35% 100%, 35% 50%, 0% 25%);
+    /* Glassy background so the shape is obvious even when empty */
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(5px);
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.2);
+}
+
+#comboFill {
+    width: 100%;
+    height: 0%;
+    /* Darker, richer green */
+    background: #009432; 
+    /* Smoother transition */
+    transition: height 0.15s ease-out, background-color 0.2s;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.4);
+}
+
+#comboFill.active {
+    background: #fdcb6e; 
+    box-shadow: 0 0 30px #fdcb6e, inset 0 0 10px rgba(255,255,255,0.6);
+}
+
+#comboLine {
+    position: absolute;
+    bottom: 80%;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #ff7675;
+    z-index: 10;
+}
+
+#comboText {
+    font-size: 2.2rem;
+    color: #ffffff;
+    text-shadow: 2px 2px 0 #2d3436;
+    transition: color 0.2s, transform 0.2s;
+}
+
+/* --- ANALYTICS PANEL STYLES --- */
+#analyticsPanel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    border: 8px solid #9c88ff;
+    padding: 30px;
+    border-radius: 30px;
+    z-index: 99999;
+    display: none; 
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+    min-width: 340px;
+}
+
+#analyticsPanel h3 {
+    margin: 0 0 10px 0;
+    text-align: center;
+    color: #9c88ff;
+    font-size: 2.5rem;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Fredoka One', cursive;
+    color: #2d3436;
+    font-size: 1.3rem;
+    border-bottom: 2px dashed #dfe4ea;
+    padding-bottom: 8px;
+}
+
+.stat-item span {
+    color: #0984e3;
+    font-weight: bold;
+}
+
+#closeAnalyticsBtn {
+    background: #e84393;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 15px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.4rem;
+    cursor: pointer;
+    box-shadow: 0 6px 0 #d63031;
+    transition: all 0.1s;
+    margin-top: 10px;
+}
+
+#closeAnalyticsBtn:hover { transform: translateY(2px); box-shadow: 0 4px 0 #d63031; }
+#closeAnalyticsBtn:active { transform: translateY(6px); box-shadow: 0 0 0 #d63031; }
