@@ -532,3 +532,57 @@ h1 {
 
 #closeAnalyticsBtn:hover { transform: translateY(2px); box-shadow: 0 4px 0 #d63031; }
 #closeAnalyticsBtn:active { transform: translateY(6px); box-shadow: 0 0 0 #d63031; }
+/* --- OFFLINE POPUP STYLES --- */
+#offlinePopup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    border: 8px solid #00b894;
+    padding: 30px;
+    border-radius: 30px;
+    z-index: 999999;
+    display: none; 
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    text-align: center;
+    min-width: 320px;
+}
+
+#offlinePopup h3 {
+    margin: 0;
+    color: #00b894;
+    font-size: 2.5rem;
+}
+
+#offlinePopup p {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #2d3436;
+    font-family: 'Fredoka One', cursive;
+}
+
+#offlineReward {
+    color: #0984e3;
+    font-size: 2.5rem;
+    text-shadow: 1px 1px 0 #fff;
+}
+
+#closeOfflineBtn {
+    background: #00b894;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 15px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.4rem;
+    cursor: pointer;
+    box-shadow: 0 6px 0 #009432;
+    transition: all 0.1s;
+    margin-top: 10px;
+}
+
+#closeOfflineBtn:hover { transform: translateY(2px); box-shadow: 0 4px 0 #009432; }
+#closeOfflineBtn:active { transform: translateY(6px); box-shadow: 0 0 0 #009432; }
