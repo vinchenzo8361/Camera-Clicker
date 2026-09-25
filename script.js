@@ -249,7 +249,7 @@ const factoryResetBtn = document.getElementById('factoryResetBtn'); const analyt
 
 function formatTime(totalSeconds) {
     const h = Math.floor(totalSeconds / 3600); const m = Math.floor((totalSeconds % 3600) / 60); const s = totalSeconds % 60;
-    let timeStr = ""; if (h > 0) timeStr += `${h}h `; if (m > 0 || h > 0) timeStr += `${m}m `; timeStr += `${s}s`; return timeStr;
+    let timeStr = ""; if (h > 0) timeStr += ${h}h ; if (m > 0 || h > 0) timeStr += ${m}m ; timeStr += ${s}s; return timeStr;
 }
 
 function updateAnalyticsUI() {
@@ -261,20 +261,23 @@ analyticsBtn.addEventListener('click', () => { updateAnalyticsUI(); analyticsPan
 closeAnalyticsBtn.addEventListener('click', () => { analyticsPanel.style.display = 'none'; });
 adminToggleBtn.addEventListener('click', () => {
     if (adminPanel.style.display === 'flex') { adminPanel.style.display = 'none'; } 
-    else { const pwd = window.prompt("Enter Admin Password:"); if (pwd === "```" || pwd === "admin") { adminPanel.style.display = 'flex'; } else if (pwd !== null) { alert("Incorrect password!"); } }
+    else { const pwd = window.prompt("Enter Admin Password:"); if (pwd === "`" || pwd === "admin") { adminPanel.style.display = 'flex'; } else if (pwd !== null) { alert("Incorrect password!"); } }
 });
 settingsBtn.addEventListener('click', () => { settingsPanel.style.display = 'flex'; });
 closeSettingsBtn.addEventListener('click', () => { settingsPanel.style.display = 'none'; });
 
 factoryResetBtn.addEventListener('click', () => {
-    if (window.confirm("Are you 100% sure you want to WIPE all your progress? This cannot be undone!")) {
-        localStorage.removeItem('cameraClickerSave'); location.reload(); 
+    const confirmVal = window.prompt("Type 'RESET' to permanently wipe all progress:");
+    if (confirmVal === "RESET") {
+        localStorage.removeItem('cameraClickerSave'); 
+        location.reload(); 
+    } else if (confirmVal !== null) {
+        alert("Reset canceled.");
     }
 });
 
 document.getElementById('adminAddScore').addEventListener('click', () => { score += 10000; updateDisplay(); });
 document.getElementById('adminSpawnGold').addEventListener('click', () => { goldenCameraActive = false; goldenCamera.style.display = 'none'; clearTimeout(goldenCameraTimeout); spawnGoldenCamera(); });
-document.getElementById('adminReset').addEventListener('click', () => { if (window.confirm("Are you sure?")) { localStorage.removeItem('cameraClickerSave'); location.reload(); } });
 
 // INITIALIZATION
 loadGame();
