@@ -23,32 +23,33 @@ let dslrCost = 25000;
 let satelliteCount = 0;
 let satelliteCost = 50000;
 
+// Frenzy State
+let comboValue = 0; 
+let comboMultiplier = 1; 
+
 const scoreDisplay = document.getElementById('score');
 const cpsDisplay = document.getElementById('cpsDisplay');
 const cameraBtn = document.getElementById('cameraBtn');
 
+// Combo Elements
+const comboFill = document.getElementById('comboFill');
+const comboText = document.getElementById('comboText');
+
 const autoFlashBtn = document.getElementById('autoFlashBtn');
 const autoFlashCostDisplay = document.getElementById('autoFlashCost');
-
 const grannyBtn = document.getElementById('grannyBtn');
 const grannyCostDisplay = document.getElementById('grannyCost');
-
 const lensBtn = document.getElementById('lensBtn');
 const lensCostDisplay = document.getElementById('lensCost');
-
 const ringLightBtn = document.getElementById('ringLightBtn');
 const ringLightCostDisplay = document.getElementById('ringLightCost');
-
 const droneBtn = document.getElementById('droneBtn');
 const droneCostDisplay = document.getElementById('droneCost');
-
 const dslrBtn = document.getElementById('dslrBtn');
 const dslrCostDisplay = document.getElementById('dslrCost');
-
 const satelliteBtn = document.getElementById('satelliteBtn');
 const satelliteCostDisplay = document.getElementById('satelliteCost');
 
-// --- 💾 AUTO SAVE / LOAD SYSTEM ---
 function saveGame() {
     const saveData = {
         score, passiveRate, clickPower,
@@ -70,25 +71,18 @@ function loadGame() {
         score = saveData.score || 0;
         passiveRate = saveData.passiveRate || 0;
         clickPower = saveData.clickPower || 1;
-        
         autoFlashCount = saveData.autoFlashCount || 0;
         autoFlashCost = saveData.autoFlashCost || 50;
-        
         grannyCount = saveData.grannyCount || 0;
         grannyCost = saveData.grannyCost || 450;
-        
         lensCount = saveData.lensCount || 0;
         lensCost = saveData.lensCost || 1000;
-        
         ringLightCount = saveData.ringLightCount || 0;
         ringLightCost = saveData.ringLightCost || 1500;
-        
         droneCount = saveData.droneCount || 0;
         droneCost = saveData.droneCost || 5000;
-        
         dslrCount = saveData.dslrCount || 0;
         dslrCost = saveData.dslrCost || 25000;
-        
         satelliteCount = saveData.satelliteCount || 0;
         satelliteCost = saveData.satelliteCost || 50000;
         
@@ -99,14 +93,12 @@ function loadGame() {
         droneCostDisplay.textContent = droneCost;
         dslrCostDisplay.textContent = dslrCost;
         satelliteCostDisplay.textContent = satelliteCost;
-        
         updateDisplay();
     }
 }
 
 setInterval(saveGame, 3000);
 
-// --- 📸 GAME UI LOGIC ---
 function updateDisplay() {
     scoreDisplay.textContent = Math.floor(score); 
     cpsDisplay.textContent = `per second: ${passiveRate.toFixed(1)}`;
@@ -120,20 +112,58 @@ function updateDisplay() {
     satelliteBtn.disabled = score < satelliteCost;
 }
 
+// MAIN 100ms GAME LOOP
 setInterval(() => {
+    // 1. Passive Income
     if (passiveRate > 0) {
         score += (passiveRate / 10);
-        updateDisplay();
     }
+    
+    // 2. Active Frenzy Decay (Drains 1.5% every 100ms = 15% per second)
+    comboValue -= 1.5;
+    if (comboValue < 0) comboValue = 0;
+    
+    // 3. Frenzy Threshold Check (80% full triggers 2x)
+    if (comboValue >= 80) {
+        comboMultiplier = 2;
+        comboFill.classList.add('active');
+        comboText.textContent = '2x!';
+        comboText.style.color = '#fdcb6e';
+        comboText.style.transform = 'scale(1.2)';
+    } else {
+        comboMultiplier = 1;
+        comboFill.classList.remove('active');
+        comboText.textContent = '1x';
+        comboText.style.color = '#fff';
+        comboText.style.transform = 'scale(1)';
+    }
+    
+    comboFill.style.height = comboValue + '%';
+    
+    updateDisplay();
 }, 100);
 
+// MANUAL CLICKING
 cameraBtn.addEventListener('click', (e) => {
-    score += clickPower; 
+    // Fill the meter by 8% per manual click
+    comboValue += 8;
+    if (comboValue > 100) comboValue = 100;
+
+    // Apply the 2x multiplier if active!
+    let earned = clickPower * comboMultiplier;
+    score += earned; 
     updateDisplay();
 
     const floatEl = document.createElement('div');
     floatEl.classList.add('floating-number');
-    floatEl.textContent = `+${clickPower} \uD83D\uDCF8`;
+    
+    // Make the floating text golden if 2x is active
+    if (comboMultiplier === 2) {
+        floatEl.style.color = '#fdcb6e';
+        floatEl.textContent = `+${earned} \uD83D\uDCF8 \u2728`; // +X Camera Sparkles
+    } else {
+        floatEl.textContent = `+${earned} \uD83D\uDCF8`;
+    }
 
     const rect = cameraBtn.getBoundingClientRect();
     const x = (e.pageX !== undefined && e.pageX !== 0) ? e.pageX : rect.left + rect.width / 2;
@@ -146,7 +176,6 @@ cameraBtn.addEventListener('click', (e) => {
     floatEl.style.top = randomY + 'px';
 
     document.body.appendChild(floatEl);
-
     setTimeout(() => { floatEl.remove(); }, 800);
 });
 
@@ -278,7 +307,6 @@ function scheduleGoldenCamera() {
 
 goldenCamera.addEventListener('click', (e) => {
     if (!goldenCameraActive) return;
-    
     goldenCamera.style.display = 'none';
     goldenCameraActive = false;
     clearTimeout(goldenCameraTimeout);
@@ -297,7 +325,6 @@ goldenCamera.addEventListener('click', (e) => {
     document.body.appendChild(floatEl);
     
     setTimeout(() => floatEl.remove(), 1500);
-    
     scheduleGoldenCamera();
 });
 
