@@ -126,8 +126,33 @@ setInterval(() => {
 }, 1000);
 
 function updateDisplay() {
-    scoreDisplay.textContent = formatNum(score); 
-    cpsDisplay.textContent = `per second: ${formatNum(passiveRate)}`;
+    const scoreStr = formatNum(score);
+    scoreDisplay.textContent = scoreStr; 
+    
+    // POLISH: Dynamic text shrinking for massive numbers (trillions+)
+    if (scoreStr.length > 15) {
+        scoreDisplay.style.fontSize = '0.55em'; // Shrink heavily
+    } else if (scoreStr.length > 12) {
+        scoreDisplay.style.fontSize = '0.75em'; // Shrink moderately
+    } else {
+        scoreDisplay.style.fontSize = '1em'; // Normal size
+    }
+
+    cpsDisplay.textContent = per second: ;
+    
+    autoFlashBtn.disabled = score < autoFlashCost;
+    grannyBtn.disabled = score < grannyCost;
+    lensBtn.disabled = score < lensCost;
+    ringLightBtn.disabled = score < ringLightCost;
+    droneBtn.disabled = score < droneCost;
+    dslrBtn.disabled = score < dslrCost;
+    satelliteBtn.disabled = score < satelliteCost;
+    hubbleBtn.disabled = score < hubbleCost;
+    quantumBtn.disabled = score < quantumCost;
+    alienBtn.disabled = score < alienCost;
+    matrixBtn.disabled = score < matrixCost;
+    winBtn.disabled = score < winCost;
+}`;
     
     autoFlashBtn.disabled = score < autoFlashCost; grannyBtn.disabled = score < grannyCost;
     lensBtn.disabled = score < lensCost; ringLightBtn.disabled = score < ringLightCost;
@@ -154,19 +179,39 @@ setInterval(() => {
 }, 100);
 
 // MANUAL CLICKING
+// HELPER: Spawn Floating Text
+function spawnFloatText(e, text, isGolden, sourceElement) {
+    const floatEl = document.createElement('div');
+    floatEl.classList.add('floating-number');
+    if (isGolden) {
+        floatEl.style.color = '#fdcb6e';
+        floatEl.classList.add('golden-reward');
+    }
+    floatEl.textContent = text;
+
+    const rect = sourceElement.getBoundingClientRect();
+    const x = (e && e.pageX !== undefined && e.pageX !== 0) ? e.pageX : rect.left + rect.width / 2;
+    const y = (e && e.pageY !== undefined && e.pageY !== 0) ? e.pageY : rect.top + rect.height / 2;
+    
+    floatEl.style.left = (x - 30 + Math.random() * 60) + 'px';
+    floatEl.style.top = (y - 30 + Math.random() * 60) + 'px';
+    
+    document.body.appendChild(floatEl);
+    setTimeout(() => { floatEl.remove(); }, 800);
+}
+
+// MANUAL CLICKING
 cameraBtn.addEventListener('click', (e) => {
-    statsManualClicks++; comboValue += 8; if (comboValue > 100) comboValue = 100;
-    let earned = clickPower * comboMultiplier; score += earned; updateDisplay();
+    statsManualClicks++; 
+    comboValue += 8; 
+    if (comboValue > 100) comboValue = 100;
+    
+    const earned = clickPower * comboMultiplier; 
+    score += earned; 
+    updateDisplay();
 
-    const floatEl = document.createElement('div'); floatEl.classList.add('floating-number');
-    if (comboMultiplier === 2) { floatEl.style.color = '#fdcb6e'; floatEl.textContent = `+${formatNum(earned)} \uD83D\uDCF8 \u2728`; } 
-    else { floatEl.textContent = `+${formatNum(earned)} \uD83D\uDCF8`; }
-
-    const rect = cameraBtn.getBoundingClientRect();
-    const x = (e.pageX !== undefined && e.pageX !== 0) ? e.pageX : rect.left + rect.width / 2;
-    const y = (e.pageY !== undefined && e.pageY !== 0) ? e.pageY : rect.top + rect.height / 2;
-    floatEl.style.left = (x - 30 + Math.random() * 60) + 'px'; floatEl.style.top = (y - 30 + Math.random() * 60) + 'px';
-    document.body.appendChild(floatEl); setTimeout(() => { floatEl.remove(); }, 800);
+    const text = comboMultiplier === 2 ? + 📸 ✨ : + 📸;
+    spawnFloatText(e, text, comboMultiplier === 2, cameraBtn);
 });
 
 // SHOP ACTIONS
@@ -227,11 +272,19 @@ function spawnGoldenCamera() {
 function scheduleGoldenCamera() { setTimeout(spawnGoldenCamera, 20000 + Math.random() * 25000); }
 
 goldenCamera.addEventListener('click', (e) => {
-    if (!goldenCameraActive) return; statsGoldenCaught++; goldenCamera.style.display = 'none'; goldenCameraActive = false; clearTimeout(goldenCameraTimeout);
-    const reward = Math.max(150, Math.floor(passiveRate * 120)); score += reward; updateDisplay();
-    const floatEl = document.createElement('div'); floatEl.classList.add('floating-number'); floatEl.classList.add('golden-reward'); floatEl.textContent = `+${formatNum(reward)} \u2B50!`;
-    floatEl.style.left = (e.pageX - 50) + 'px'; floatEl.style.top = (e.pageY - 50) + 'px';
-    document.body.appendChild(floatEl); setTimeout(() => floatEl.remove(), 1500); scheduleGoldenCamera();
+    if (!goldenCameraActive) return; 
+    statsGoldenCaught++; 
+    goldenCamera.style.display = 'none'; 
+    goldenCameraActive = false; 
+    clearTimeout(goldenCameraTimeout);
+    
+    const reward = Math.max(150, Math.floor(passiveRate * 120)); 
+    score += reward; 
+    updateDisplay();
+    
+    spawnFloatText(e, + ⭐!, true, goldenCamera);
+    
+    scheduleGoldenCamera();
 });
 
 // --- ⚙️ SETTINGS, ANALYTICS & 🛠️ ADMIN MODE ---

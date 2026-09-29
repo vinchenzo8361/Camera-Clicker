@@ -586,3 +586,14 @@ h1 {
 
 #closeOfflineBtn:hover { transform: translateY(2px); box-shadow: 0 4px 0 #009432; }
 #closeOfflineBtn:active { transform: translateY(6px); box-shadow: 0 0 0 #009432; }
+/* --- POLISH: CUSTOM SCROLLBARS FOR SHOP --- */
+#shop::-webkit-scrollbar { width: 10px; }
+#shop::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
+#shop::-webkit-scrollbar-thumb { background: #0984e3; border-radius: 10px; }
+#shop::-webkit-scrollbar-thumb:hover { background: #74b9ff; }
+
+/* --- POLISH: SCORE SMOOTH SCALING --- */
+#score {
+    transition: font-size 0.2s ease-in-out;
+    display: inline-block;
+}
