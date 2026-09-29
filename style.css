@@ -599,22 +599,22 @@ h1 {
 }
 /* --- POLISH: CROWN BUTTON STYLES --- */
 #crownDisplay {
-    background: #fdcb6e;
-    color: #2d3436;
+    background: #6c5ce7; /* Royal Purple so the gold emoji pops */
+    color: #ffffff;
     border: none;
-    padding: 10px 20px;
+    padding: 8px 18px;
     border-radius: 15px;
     font-family: 'Fredoka One', cursive;
-    font-size: 1.2rem;
-    box-shadow: 0 4px 0 #e17055;
-    cursor: default; /* Not clickable */
-    display: none; /* Toggled by JS */
+    font-size: 1.3rem;
+    box-shadow: 0 4px 0 #4834d4;
+    cursor: default;
+    display: none;
     align-items: center;
     justify-content: center;
 }
 
 /* --- POLISH: SCOREBOARD PLACEMENT --- */
 #scoreBoard {
-    margin-top: 80px; /* Push the score text down so it doesn't overlap the top edge or frenzy meter */
-    margin-bottom: 30px; /* Add some space between the score and the camera button */
+    margin-top: 80px; 
+    margin-bottom: 30px; 
 }
