@@ -129,30 +129,16 @@ function updateDisplay() {
     const scoreStr = formatNum(score);
     scoreDisplay.textContent = scoreStr; 
     
-    // POLISH: Dynamic text shrinking for massive numbers (trillions+)
+    // Dynamic text shrinking for massive numbers (trillions+)
     if (scoreStr.length > 15) {
-        scoreDisplay.style.fontSize = '0.55em'; // Shrink heavily
+        scoreDisplay.style.fontSize = '0.55em';
     } else if (scoreStr.length > 12) {
-        scoreDisplay.style.fontSize = '0.75em'; // Shrink moderately
+        scoreDisplay.style.fontSize = '0.75em';
     } else {
-        scoreDisplay.style.fontSize = '1em'; // Normal size
+        scoreDisplay.style.fontSize = '1em';
     }
 
-    cpsDisplay.textContent = per second: ;
-    
-    autoFlashBtn.disabled = score < autoFlashCost;
-    grannyBtn.disabled = score < grannyCost;
-    lensBtn.disabled = score < lensCost;
-    ringLightBtn.disabled = score < ringLightCost;
-    droneBtn.disabled = score < droneCost;
-    dslrBtn.disabled = score < dslrCost;
-    satelliteBtn.disabled = score < satelliteCost;
-    hubbleBtn.disabled = score < hubbleCost;
-    quantumBtn.disabled = score < quantumCost;
-    alienBtn.disabled = score < alienCost;
-    matrixBtn.disabled = score < matrixCost;
-    winBtn.disabled = score < winCost;
-}`;
+    cpsDisplay.textContent = `per second: ${formatNum(passiveRate)}`;
     
     autoFlashBtn.disabled = score < autoFlashCost; grannyBtn.disabled = score < grannyCost;
     lensBtn.disabled = score < lensCost; ringLightBtn.disabled = score < ringLightCost;
@@ -178,7 +164,6 @@ setInterval(() => {
     comboFill.style.height = comboValue + '%'; updateDisplay();
 }, 100);
 
-// MANUAL CLICKING
 // HELPER: Spawn Floating Text
 function spawnFloatText(e, text, isGolden, sourceElement) {
     const floatEl = document.createElement('div');
@@ -210,7 +195,7 @@ cameraBtn.addEventListener('click', (e) => {
     score += earned; 
     updateDisplay();
 
-    const text = comboMultiplier === 2 ? + 📸 ✨ : + 📸;
+    const text = comboMultiplier === 2 ? `+${formatNum(earned)} 📸 ✨` : `+${formatNum(earned)} 📸`;
     spawnFloatText(e, text, comboMultiplier === 2, cameraBtn);
 });
 
@@ -247,13 +232,10 @@ winBtn.addEventListener('click', () => {
 // PRESTIGE LOGIC
 prestigeBtn.addEventListener('click', () => {
     timesWon++;
-    localStorage.removeItem('cameraClickerSave'); // Wipe everything
-    
-    // Inject the timesWon back into a fresh save block immediately to persist the crown
+    localStorage.removeItem('cameraClickerSave'); 
     const freshSave = { timesWon: timesWon };
     localStorage.setItem('cameraClickerSave', JSON.stringify(freshSave));
-    
-    location.reload(); // Hard reset UI
+    location.reload(); 
 });
 
 // --- 🌟 GOLDEN CAMERA SYSTEM ---
@@ -282,7 +264,7 @@ goldenCamera.addEventListener('click', (e) => {
     score += reward; 
     updateDisplay();
     
-    spawnFloatText(e, + ⭐!, true, goldenCamera);
+    spawnFloatText(e, `+${formatNum(reward)} ⭐!`, true, goldenCamera);
     
     scheduleGoldenCamera();
 });
