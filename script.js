@@ -100,7 +100,7 @@ function loadGame() {
         hubbleCostDisplay.textContent = formatNum(hubbleCost); quantumCostDisplay.textContent = formatNum(quantumCost);
         alienCostDisplay.textContent = formatNum(alienCost); matrixCostDisplay.textContent = formatNum(matrixCost);
 
-        if (timesWon > 0) { crownDisplay.style.display = 'block'; crownCount.textContent = formatNum(timesWon); }
+        if (timesWon > 0) { crownDisplay.style.display = 'flex'; crownCount.textContent = formatNum(timesWon); }
 
         if (saveData.lastSaveTime && passiveRate > 0) {
             const timeDiffSeconds = Math.floor((Date.now() - saveData.lastSaveTime) / 1000);

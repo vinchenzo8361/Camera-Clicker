@@ -597,3 +597,24 @@ h1 {
     transition: font-size 0.2s ease-in-out;
     display: inline-block;
 }
+/* --- POLISH: CROWN BUTTON STYLES --- */
+#crownDisplay {
+    background: #fdcb6e;
+    color: #2d3436;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 15px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 0 #e17055;
+    cursor: default; /* Not clickable */
+    display: none; /* Toggled by JS */
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- POLISH: SCOREBOARD PLACEMENT --- */
+#scoreBoard {
+    margin-top: 80px; /* Push the score text down so it doesn't overlap the top edge or frenzy meter */
+    margin-bottom: 30px; /* Add some space between the score and the camera button */
+}

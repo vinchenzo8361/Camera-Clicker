@@ -8,11 +8,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- PRESTIGE CROWN DISPLAY -->
-    <div id="crownDisplay" style="display:none; position:absolute; top:20px; left:50%; transform:translateX(-50%); font-size:2.5rem; color:#fdcb6e; font-family:'Fredoka One', cursive; text-shadow:3px 3px 0 #2d3436; z-index:100;">
-        👑 x<span id="crownCount">0</span>
-    </div>
-
     <!-- WIN SCREEN MODAL -->
     <div id="winModal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.9); z-index:9999999; flex-direction:column; justify-content:center; align-items:center; color:white; font-family:'Fredoka One', cursive; text-align:center;">
         <h1 style="font-size:6rem; color:#fdcb6e; margin-bottom:10px; text-shadow:0 0 30px #fdcb6e;">🎉 YOU WON! 🎉</h1>
@@ -26,9 +21,11 @@
             <button id="settingsBtn">⚙️ Settings</button>
             <button id="analyticsBtn">📊 Analytics</button>
             <button id="adminToggleBtn">🛠️ Admin</button>
+            <!-- CROWN DISPLAY AS BUTTON -->
+            <div id="crownDisplay">👑 x<span id="crownCount">0</span></div>
         </div>
 
-        <!-- SETTINGS PANEL (Audio Removed) -->
+        <!-- SETTINGS PANEL -->
         <div id="settingsPanel">
             <h3>⚙️ Settings</h3>
             <div class="setting-item">
@@ -107,7 +104,6 @@
                 <button id="satelliteBtn" disabled>Buy: <span id="satelliteCost">50,000</span></button>
             </div>
             
-            <!-- THE NEW BILLION/TRILLION TIER -->
             <div class="upgrade" id="buyHubble">
                 <div class="upgrade-info"><h3>🌌 Hubble Telescope</h3><p>+5,000 photos/sec</p></div>
                 <button id="hubbleBtn" disabled>Buy: <span id="hubbleCost">5,000,000</span></button>
